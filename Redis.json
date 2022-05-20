@@ -1,0 +1,71 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+  
+    "Description" : " Redis.",
+  
+    "Parameters" : {
+  
+      "VpcId" : {
+        "Type" : "String",
+        "Description" : "VpcId of your existing Virtual Private Cloud (VPC)"
+      }
+    },
+
+
+
+
+
+  "Resources": {
+
+
+    "elasticacheSubnetGroup": {
+      "Type": "AWS::ElastiCache::SubnetGroup",
+      "Properties": {
+        "Description": "SubnetsRedis",
+        "SubnetIds": [
+          { "Ref": "PrivateSubnet1" },
+          { "Ref": "PrivateSubnet2" }
+        ]
+      }
+    },
+
+
+    "BasicReplicationGroup": {
+      "Type": "AWS::ElastiCache::ReplicationGroup",
+      "Properties": {
+        "AutomaticFailoverEnabled": true,
+        "CacheNodeType": "cache.t2.micro",
+        "CacheSubnetGroupName": {
+          "Ref": "elasticacheSubnetGroup"
+        },
+        "Engine": "redis",
+        "EngineVersion": "6.2",
+        "NumNodeGroups": "1",
+        "ReplicasPerNodeGroup": "1",
+        "Port": 6379,
+        "ReplicationGroupDescription": "A sample replication group",
+        "SecurityGroupIds": [
+          {
+            "Ref": "NoIngressSecurityGroup"
+          }
+        ]
+      }
+    },
+
+    "ElasticacheSecurityGroup": {
+      "Type": "AWS::EC2::SecurityGroup",
+      "Properties": {
+        "GroupDescription": "Security group for RDS DB Instance.",
+        "VpcId": { "Ref": "VpcId" }
+      }
+    }
+
+
+
+
+
+
+  }
+}
+
+

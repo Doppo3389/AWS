@@ -1,0 +1,73 @@
+ECR Mainkraft
+------------------------------------------------
+FROM adoptopenjdk:16-jre                       #
+COPY . /                                       #
+EXPOSE 25565/TCP                               #
+EXPOSE 25565/UDP                               #
+RUN echo $(ls)                                 #
+ENTRYPOINT ["/Start.sh"]                       #
+------------------------------------------------
+
+
+
+flatris
+------------------------------------------------
+FROM node:12                                   #
+WORKDIR /usr/src/app                           #
+COPY package.json yarn.lock ./                 #
+RUN yarn --frozen-lockfile                     #
+COPY . ./                                      #
+RUN yarn build                                 #
+EXPOSE 3000                                    #
+CMD yarn start                                 #
+                                               #
+                                               #
+------------------------------------------------
+
+
+EC2Mainkraft ALLTime 
+------------------------------------------------                          
+[Unit]                                         #
+Description=Mainkraft                          #
+After=network.target                           #
+                                               #
+[Service]                                      #
+User=user                                      #
+WorkingDirectory=/usr/share/mainkraft          #
+ExecStart=/usr/share/maikraft                  #
+Restart=always                                 #
+                                               #
+[Install]                                      #
+WantedBy=multi-user.target                     #
+                                               #
+systemctl enable --now mainkraft.service       #
+------------------------------------------------
+
+
+WEB53 => Docker
+-------------------------------------------------                         
+  FROM alpine:latest                            #
+COPY . /                                        #
+EXPOSE 8080/UDP                                 #
+EXPOSE 8080/TCP                                 #
+RUN echo $(ls)                                  #
+ENTRYPOINT ["./web-53"]                         #               
+-------------------------------------------------
+
+
+#!bin/bash 
+lava -jar Start.sh
+
+
+[Unit]                                         
+Description=web53                          
+After=network.target                           
+                                               
+[Service]                                      
+User=mainkraft                                 
+WorkingDirectory=/usr/share/web53         
+ExecStart=/usr/share/web53/web-53                  
+Restart=always                                 
+                                               
+[Install]                                      
+WantedBy=multi-user.target

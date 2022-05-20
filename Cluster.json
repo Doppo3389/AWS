@@ -1,0 +1,18 @@
+{"AWSTemplateFormatVersion" : "2010-09-09",
+
+  "Description" : "ECR",
+
+  "Parameters" : {
+    
+    },
+    "Resources" :{
+        "ECSCluster": {
+            "Type": "AWS::ECS::Cluster",
+            "Properties": {
+                "ClusterName": "MyEmptyCluster"
+            }
+        }
+
+    }
+}
+    
