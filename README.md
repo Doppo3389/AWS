@@ -3,3 +3,5 @@
 
 ## Задействованные сервисы
 CloudFormation: VPC; EC2, ECR, ECS, CloudWatch, Redis, Mysql, DynamoDB, WAFV2, Lambda+DynamoDB
+
+## Описания заданий находятся в day1.pdf, day2.pdf 
